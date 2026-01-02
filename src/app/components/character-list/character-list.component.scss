@@ -1,0 +1,386 @@
+/* Overlay gradiente sull'immagine */
+
+.Image__Wrapper {
+    position: relative;
+    width: 100vw;
+    min-height: 400px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.85) 0%, rgba(220, 20, 60, 0.75) 50%, rgba(255, 140, 0, 0.85) 100%), url('/assets/vegeta-horizontal.jpg') center center/cover no-repeat;
+}
+
+.Masthead__Background__Built__Image {
+    position: relative;
+    z-index: 1;
+}
+
+.Masthead__Container {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100vw;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    color: #fff;
+    z-index: 3;
+    pointer-events: none;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+}
+.Masthead__Container > * {
+    pointer-events: auto;
+}
+
+.Masthead__section {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+.Masthead__Background__Built__Image.mini_background_img {
+    position: relative;
+    z-index: 2;
+    width: 100vw;
+    height: 416px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Character List Container */
+.character-list-container {
+    width: 100%;
+    background: linear-gradient(180deg, #fef5e7 0%, #fff5e6 50%, #fff 100%);
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #f44336 0%, #dc143c 50%, #ff8c00 100%);
+    padding: 100px 20px 80px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+    
+    @media (max-width: 768px) {
+        padding: 60px 20px 50px;
+    }
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+    margin: 0 0 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    
+    @media (max-width: 768px) {
+        font-size: 2.5rem;
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin: 0;
+    font-weight: 500;
+    
+    @media (max-width: 768px) {
+        font-size: 1.1rem;
+    }
+}
+
+/* Search Container */
+.search-container {
+    max-width: 800px;
+    margin: -50px auto 60px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+    
+    @media (max-width: 768px) {
+        margin: -30px auto 40px;
+    }
+}
+
+/* Search Section */
+.search-section {
+    background: white;
+    padding: 32px 0 24px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.search-wrapper {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Results Header */
+.results-header {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.results-count {
+    font-size: 0.875rem;
+    color: #666;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.count-number {
+    font-weight: 700;
+    color: #333;
+}
+
+.sort-by {
+    font-size: 0.875rem;
+    color: #666;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.sort-value {
+    font-weight: 700;
+    color: #e62429;
+}
+
+/* Character Grid - Stile Marvel */
+.character-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+    
+    @media (max-width: 768px) {
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
+
+
+/* Character Card - Stile Dragon Ball */
+.character-card {
+    background: white;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.15);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    height: 100%;
+    position: relative;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(244, 67, 54, 0.3);
+    border-color: #ff8c00;
+}
+
+.card-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 133%; /* Ratio 3:4 come Marvel */
+    overflow: hidden;
+    background: #000;
+}
+
+.character-image {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    object-position: center;
+    background: #f9f9f9;
+    display: block;
+    
+    @media (max-width: 768px) {
+        height: 240px;
+    }
+}
+
+mat-card-header {
+    padding: 16px;
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    position: relative;
+}
+
+mat-card-title {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    color: white !important;
+    margin: 0 0 6px 0 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    line-height: 1.3 !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+mat-card-subtitle {
+    font-size: 0.85rem !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    margin: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500 !important;
+}
+
+mat-card-content {
+    padding: 16px;
+    background: #fafafa;
+    flex: 1;
+    position: relative;
+    
+    .character-ki {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #f44336;
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin: 0;
+        
+        mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+mat-card-actions {
+    padding: 12px 16px;
+    border-top: 1px solid #e0e0e0;
+    background: white;
+    position: relative;
+    
+    button {
+        font-weight: 700;
+        letter-spacing: 1px;
+        
+        &:hover {
+            background: rgba(244, 67, 54, 0.05);
+        }
+    }
+}
+
+/* Results Info */
+.results-info {
+    max-width: 1400px;
+    margin: 0 auto 35px;
+    padding: 20px 20px;
+    
+    p {
+        margin: 0;
+        color: #333;
+        font-size: 1.1rem;
+        font-weight: 500;
+        text-align: center;
+        background: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 3px 12px rgba(244, 67, 54, 0.1);
+        border-left: 4px solid #f44336;
+        
+        strong {
+            color: #f44336;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+    }
+}
+
+/* Loading */
+.loading-container {
+    text-align: center;
+    padding: 80px 20px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    mat-spinner {
+        margin: 0 auto 24px;
+    }
+    
+    p {
+        color: #f44336;
+        font-size: 1.3rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+}
+
+/* No Results */
+.no-results {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 20px;
+    
+    mat-card {
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(244, 67, 54, 0.1);
+        border: 2px dashed #e0e0e0;
+    }
+    
+    mat-card-content {
+        mat-icon {
+            font-size: 64px;
+            width: 64px;
+            height: 64px;
+            color: #f44336;
+            margin-bottom: 16px;
+        }
+        
+        p {
+            color: #666;
+            font-size: 1.1rem;
+            margin: 12px 0;
+            
+            &:first-of-type {
+                font-weight: 600;
+                color: #333;
+                font-size: 1.3rem;
+            }
+        }
+    }
+}

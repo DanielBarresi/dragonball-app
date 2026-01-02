@@ -1,0 +1,30 @@
+<div class="search-form">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search character or planet</mat-label>
+    <input
+      matInput
+      [(ngModel)]="searchTerm"
+      (keyup.enter)="onSearch()"
+      placeholder="E.g.: Goku, Vegeta, Namek"
+    />
+    <mat-icon matPrefix>search</mat-icon>
+    <button
+      mat-icon-button
+      matSuffix
+      *ngIf="searchTerm"
+      (click)="onClear()"
+      aria-label="Clear"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSearch()"
+    class="search-button"
+  >
+    <mat-icon>search</mat-icon>
+    Search
+  </button>
+</div>

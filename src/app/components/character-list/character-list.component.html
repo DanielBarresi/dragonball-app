@@ -1,0 +1,61 @@
+<div class="character-list-container">
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Dragon Ball Characters</h1>
+      <p class="hero-subtitle">
+        Discover all the iconic characters of the Dragon Ball universe!
+      </p>
+    </div>
+  </section>
+
+  <div class="search-container">
+    <app-search-form-component></app-search-form-component>
+  </div>
+
+  <ng-container *ngIf="loading">
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Loading characters...</p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!loading">
+    <div class="results-info" *ngIf="searchTerm">
+      <p>
+        <strong>{{ filteredCharacters.length }}</strong> results for "{{
+          searchTerm
+        }}"
+      </p>
+    </div>
+
+    <div class="character-grid" *ngIf="filteredCharacters.length > 0">
+      <mat-card
+        class="character-card"
+        *ngFor="let character of filteredCharacters"
+        [routerLink]="['/characters', character.id]"
+      >
+        <img
+          [src]="character.image"
+          [alt]="character.name"
+          class="character-image"
+        />
+        <mat-card-header>
+          <mat-card-title>{{ character.name }}</mat-card-title>
+          <mat-card-subtitle *ngIf="character.race">
+            {{ character.race }}
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+
+    <div class="no-results" *ngIf="filteredCharacters.length === 0">
+      <mat-card>
+        <mat-card-content>
+          <mat-icon>search_off</mat-icon>
+          <p>No characters found for "{{ searchTerm }}"</p>
+          <p>Try another search term.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-container>
+</div>

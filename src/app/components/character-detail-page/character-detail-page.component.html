@@ -1,0 +1,106 @@
+<div class="character-detail">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="goBack()"
+    class="back-button"
+  >
+    <mat-icon>arrow_back</mat-icon> Back to list
+  </button>
+
+  <ng-container *ngIf="loading">
+    <mat-card appearance="outlined">
+      <mat-card-content>
+        <mat-spinner></mat-spinner>
+        <p>Loading character details...</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+
+  <ng-container *ngIf="!loading && character">
+    <mat-card appearance="outlined" class="detail-card">
+      <mat-card-header>
+        <mat-card-title>{{ character.name }}</mat-card-title>
+        <mat-card-subtitle *ngIf="character.race">
+          {{ character.race }} - {{ character.gender }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <div class="character-content">
+        <div class="character-image-container">
+          <img
+            *ngIf="character.image"
+            [src]="character.image"
+            [alt]="character.name"
+            class="character-detail-image"
+          />
+        </div>
+
+        <mat-card-content class="character-info">
+          <div class="info-section" *ngIf="character.description">
+            <h3>Description</h3>
+            <p>{{ character.description }}</p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-item" *ngIf="character.ki">
+              <mat-icon>flash_on</mat-icon>
+              <div>
+                <strong>Base Ki:</strong>
+                <span>{{ character.ki }}</span>
+              </div>
+            </div>
+
+            <div class="stat-item" *ngIf="character.maxKi">
+              <mat-icon>whatshot</mat-icon>
+              <div>
+                <strong>Max Ki:</strong>
+                <span>{{ character.maxKi }}</span>
+              </div>
+            </div>
+
+            <div class="stat-item" *ngIf="character.affiliation">
+              <mat-icon>group</mat-icon>
+              <div>
+                <strong>Affiliation:</strong>
+                <span>{{ character.affiliation }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="transformations"
+            *ngIf="
+              character.transformations && character.transformations.length > 0
+            "
+          >
+            <h3>Transformations</h3>
+            <div class="transformation-list">
+              <div class="transformation-chips">
+                <span
+                  class="transformation-chip"
+                  *ngFor="let trans of character.transformations"
+                >
+                  {{ trans.name }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="origin-planet" *ngIf="character.originPlanet">
+            <h3>Origin Planet</h3>
+            <p>{{ character.originPlanet.name }}</p>
+          </div>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  </ng-container>
+
+  <ng-container *ngIf="!loading && !character">
+    <mat-card appearance="outlined">
+      <mat-card-content>
+        <p>Character not found.</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>

@@ -1,0 +1,40 @@
+<nav class="desktopNav">
+  <div class="desktopNav__upper">
+    <div class="desktopNav__left-flex">
+      <span class="db-title">Dragon Ball Universe</span>
+      <div class="desktopNav__tabContainer">
+        <button mat-icon-button aria-label="Account">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <a mat-button class="login-link" href="#">Log In</a>
+        <span class="user-menu-tab separator">|</span>
+        <a mat-button class="signup-link" href="#">Sign Up</a>
+      </div>
+    </div>
+    <div class="desktopNav__center-logo">
+      <a class="desktopNav__logo" routerLink="/">
+        <img src="assets/dragon_ball_daima-logo_.png" alt="Dragon Ball Logo" />
+      </a>
+    </div>
+  </div>
+  <div class="desktopNav__lower">
+    <ul class="desktopNav__linkContainer">
+      <li class="desktopNav__linkWrapper">
+        <a
+          class="desktopNav__link"
+          routerLink="/planets"
+          routerLinkActive="active"
+          >Planets</a
+        >
+      </li>
+      <li class="desktopNav__linkWrapper">
+        <a
+          class="desktopNav__link"
+          routerLink="/characters"
+          routerLinkActive="active"
+          >Characters</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

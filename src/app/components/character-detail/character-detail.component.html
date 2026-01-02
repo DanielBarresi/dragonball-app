@@ -1,0 +1,51 @@
+<div class="planet-detail">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="goBack()"
+    class="back-button"
+  >
+    <mat-icon>arrow_back</mat-icon> Torna alla lista
+  </button>
+
+  <ng-container *ngIf="loading">
+    <mat-card appearance="outlined">
+      <mat-card-content>
+        <mat-spinner></mat-spinner>
+        <p>Caricamento dettagli...</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+
+  <ng-container *ngIf="!loading && planet">
+    <mat-card appearance="outlined" class="detail-card">
+      <mat-card-header>
+        <mat-card-title>{{ planet.name }}</mat-card-title>
+      </mat-card-header>
+      <img
+        mat-card-image
+        *ngIf="planet.image"
+        [src]="planet.image"
+        alt="{{ planet.name }}"
+      />
+      <mat-card-content>
+        <p>
+          <strong>Descrizione:</strong>
+          {{ planet.description || "Nessuna descrizione disponibile" }}
+        </p>
+        <p *ngIf="planet.race"><strong>Razza:</strong> {{ planet.race }}</p>
+        <p *ngIf="planet.isDestroyed !== undefined">
+          <strong>Distrutto:</strong> {{ planet.isDestroyed ? "Sì" : "No" }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+
+  <ng-container *ngIf="!loading && !planet">
+    <mat-card appearance="outlined">
+      <mat-card-content>
+        <p>Pianeta non trovato.</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>

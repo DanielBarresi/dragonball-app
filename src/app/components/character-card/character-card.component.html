@@ -1,0 +1,270 @@
+<section id="masthead-1" class="Masthead__section" data-testid="drupal">
+  <div class="Masthead mini_background_img dark" data-position="1">
+    <div class="MastheadDefault">
+      <div class="Masthead__Wrapper mini_background_img">
+        <div class="Masthead__Background__Wrapper mini_background_img">
+          <div class="Masthead__Background mini_background_img">
+            <div
+              class="Masthead__Background__Built__Wrapper mini_background_img"
+            >
+              <div class="Image__Wrapper" data-testid="image_wrapper">
+                <div class="Masthead__Container mini_background_img">
+                  <h1 class="Masthead__Headline mini_background_img">
+                    Dragon Ball Planets
+                  </h1>
+                  <div class="Masthead__Copywrite mini_background_img">
+                    Esplora tutti i pianeti leggendari dell'universo Dragon
+                    Ball!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="card-dan">
+  <div class="search-container">
+    <app-search-form-component></app-search-form-component>
+  </div>
+
+  <ng-container *ngIf="loading; else loaded">
+    <mat-card class="dan-card" appearance="outlined">
+      <mat-card-content>
+        <mat-spinner></mat-spinner>
+        <p>Caricamento in corso...</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+
+  <ng-template #loaded>
+    <div class="results-info" *ngIf="searchTerm">
+      <p>
+        <strong>{{ filteredPlanets.length }}</strong> risultati per "{{
+          searchTerm
+        }}"
+      </p>
+    </div>
+
+    <ng-container *ngIf="filteredPlanets.length > 0; else noData">
+      <div class="planet-cards">
+        <mat-card
+          class="dan-card"
+          appearance="outlined"
+          *ngFor="let planet of filteredPlanets"
+        >
+          <mat-card-header>
+            <div mat-card-avatar class="dan-header-image"></div>
+            <mat-card-title>{{ planet.name }}</mat-card-title>
+            <mat-card-subtitle *ngIf="planet.description">{{
+              planet.description
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <img
+            mat-card-image
+            [src]="planet.image"
+            alt="Immagine pianeta"
+            *ngIf="planet.image"
+          />
+          <mat-card-content>
+            <p *ngIf="planet.race">{{ planet.race }}</p>
+            <p *ngIf="!planet.race && !planet.description">
+              Nessuna informazione aggiuntiva.
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button matButton [routerLink]="['/planets', planet.id]">
+              DETAILS
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </ng-container>
+
+    <ng-template #noData>
+      <mat-card class="dan-card" appearance="outlined">
+        <mat-card-content>
+          <mat-icon>search_off</mat-icon>
+          <p *ngIf="searchTerm">
+            Nessun pianeta trovato per "{{ searchTerm }}"
+          </p>
+          <p *ngIf="!searchTerm">Nessun dato disponibile.</p>
+        </mat-card-content>
+      </mat-card>
+    </ng-template>
+  </ng-template>
+</div>
+
+<!-- SEZIONE PERSONAGGI -->
+<div class="characters-section">
+  <div class="section-header">
+    <h2 class="section-title">Dragon Ball Characters</h2>
+  </div>
+
+  <!-- FILTRI STILE MARVEL -->
+  <div class="filters-container">
+    <div class="filters-wrapper">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Filter by Race</mat-label>
+        <mat-select
+          [(ngModel)]="selectedRace"
+          (selectionChange)="onFilterChange()"
+        >
+          <mat-option value="">All Races</mat-option>
+          <mat-option *ngFor="let race of races" [value]="race">{{
+            race
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Filter by Gender</mat-label>
+        <mat-select
+          [(ngModel)]="selectedGender"
+          (selectionChange)="onFilterChange()"
+        >
+          <mat-option value="">All Genders</mat-option>
+          <mat-option *ngFor="let gender of genders" [value]="gender">{{
+            gender
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Filter by Affiliation</mat-label>
+        <mat-select
+          [(ngModel)]="selectedAffiliation"
+          (selectionChange)="onFilterChange()"
+        >
+          <mat-option value="">All Affiliations</mat-option>
+          <mat-option *ngFor="let aff of affiliations" [value]="aff">{{
+            aff
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="clearFilters()"
+        class="clear-btn"
+      >
+        <mat-icon>clear</mat-icon>
+        Clear Filters
+      </button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="loadingCharacters">
+    <mat-card class="dan-card" appearance="outlined">
+      <mat-card-content>
+        <mat-spinner></mat-spinner>
+        <p>Caricamento personaggi...</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+
+  <ng-container *ngIf="!loadingCharacters">
+    <!-- HEADER RISULTATI -->
+    <div class="results-header-marvel">
+      <div class="results-count-marvel">
+        <span class="count-number">{{ filteredCharacters.length }}</span>
+        RESULTS
+      </div>
+      <div class="pagination-info">
+        Page {{ currentPage }} of {{ totalPages }}
+      </div>
+    </div>
+
+    <div class="character-cards" *ngIf="filteredCharacters.length > 0">
+      <mat-card
+        class="dan-card character-card-item"
+        appearance="outlined"
+        *ngFor="let character of filteredCharacters"
+        [routerLink]="['/characters', character.id]"
+      >
+        <mat-card-header>
+          <div mat-card-avatar class="dan-header-image"></div>
+          <mat-card-title>{{ character.name }}</mat-card-title>
+          <mat-card-subtitle *ngIf="character.race">
+            {{ character.race }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img
+          mat-card-image
+          [src]="character.image"
+          [alt]="character.name"
+          class="character-image"
+        />
+        <mat-card-content>
+          <p *ngIf="character.affiliation">
+            <strong>Affiliation:</strong> {{ character.affiliation }}
+          </p>
+          <p *ngIf="character.ki"><strong>Ki:</strong> {{ character.ki }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button matButton>DETTAGLI</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <!-- PAGINAZIONE -->
+    <div class="pagination-controls" *ngIf="totalPages > 1">
+      <button
+        mat-raised-button
+        [disabled]="currentPage === 1"
+        (click)="goToPage(1)"
+        class="pagination-btn"
+      >
+        <mat-icon>first_page</mat-icon>
+        FIRST
+      </button>
+
+      <button
+        mat-raised-button
+        [disabled]="currentPage === 1"
+        (click)="previousPage()"
+        class="pagination-btn"
+      >
+        <mat-icon>chevron_left</mat-icon>
+        PREVIOUS
+      </button>
+
+      <div class="page-info">Page {{ currentPage }} / {{ totalPages }}</div>
+
+      <button
+        mat-raised-button
+        [disabled]="currentPage === totalPages"
+        (click)="nextPage()"
+        class="pagination-btn"
+      >
+        NEXT
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+
+      <button
+        mat-raised-button
+        [disabled]="currentPage === totalPages"
+        (click)="goToPage(totalPages)"
+        class="pagination-btn"
+      >
+        LAST
+        <mat-icon>last_page</mat-icon>
+      </button>
+    </div>
+
+    <mat-card
+      class="dan-card"
+      appearance="outlined"
+      *ngIf="filteredCharacters.length === 0"
+    >
+      <mat-card-content>
+        <mat-icon>search_off</mat-icon>
+        <p>Nessun personaggio trovato con i filtri selezionati</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>
